@@ -72,7 +72,7 @@ public class PrimaryController {
 
     @FXML
     private Label listListaCuentas;
-
+ 
     @FXML
     void crearBanco(ActionEvent event) {
         String nombreBanco = txNombreBanco.getText();
