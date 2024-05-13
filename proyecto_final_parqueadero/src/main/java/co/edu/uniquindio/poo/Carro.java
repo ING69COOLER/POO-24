@@ -1,10 +1,15 @@
 package co.edu.uniquindio.poo;
 
-public class Carro extends Vehiculo{
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
+public class Carro extends Vehiculo {
     private int tarifa;
 
-    public Carro(String placa, String modelo, String propietario, Puesto puesto, int tarifa) {
-        super(placa, modelo, propietario, puesto);
+    
+
+    public Carro(String placa, String modelo, String propietario, LocalTime horaEntrada, int tarifa) {
+        super(placa, modelo, propietario, horaEntrada);
         this.tarifa = tarifa;
     }
 
@@ -18,7 +23,22 @@ public class Carro extends Vehiculo{
 
     @Override
     public String toString() {
-        return "Carro [tarifa=" + tarifa + "]";
+        return "Carro [tarifa=" + tarifa + ", getTarifa()=" + getTarifa() + ", getPlaca()=" + getPlaca()
+                + ", getModelo()=" + getModelo() + ", getPropietario()=" + getPropietario() + ", getHoraEntrada()="
+                + getHoraEntrada() + "]";
     }
+
+    @Override
+    protected int obtenerTarifa( ) {
+        int valor = 0;
+        long restaTiempo = ChronoUnit.HOURS.between(getHoraEntrada(),getHoraSalida());
+        int tiempoTotal = (int) restaTiempo;
+        valor = tarifa*(tiempoTotal);
+        return valor;
+    }
+
+    
+
+    
     
 }

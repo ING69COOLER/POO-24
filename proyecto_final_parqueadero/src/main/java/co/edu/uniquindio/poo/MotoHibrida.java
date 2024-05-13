@@ -1,24 +1,48 @@
 package co.edu.uniquindio.poo;
 
-public class MotoHibrida extends Moto{
- private int tarifa;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
-public MotoHibrida(String placa, String modelo, String propietario, Puesto puesto, String velocidad, int tarifa) {
-    super(placa, modelo, propietario, puesto, velocidad);
-    this.tarifa = tarifa;
-}
+public class MotoHibrida extends Moto {
+    private int tarifa;
 
-public int getTarifa() {
-    return tarifa;
-}
+  
 
-public void setTarifa(int tarifa) {
-    this.tarifa = tarifa;
-}
+    public MotoHibrida(String placa, String modelo, String propietario, LocalTime horaEntrada, int velocidad,
+            int tarifa) {
+        super(placa, modelo, propietario, horaEntrada, velocidad);
+        this.tarifa = tarifa;
+    }
 
-@Override
-public String toString() {
-    return "MotoHibrida [tarifa=" + tarifa + "]";
-}
+    public int getTarifa() {
+        return tarifa;
+    }
 
+    public void setTarifa(int tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    @Override
+    public String toString() {
+        return "MotoHibrida{" +
+                "placa='" + getPlaca() + '\'' +
+                ", modelo='" + getModelo() + '\'' +
+                ", propietario='" + getPropietario() + '\'' +
+                ", velocidad=" + getVelocidad() +
+                ", tarifa=" + tarifa +
+                '}';
+    }
+
+    @Override
+    protected int obtenerTarifa() {
+       int valor = 0;
+        long restaTiempo = ChronoUnit.HOURS.between(getHoraEntrada(),getHoraSalida());
+        int tiempoTotal = (int) restaTiempo;
+        valor = tarifa*(tiempoTotal);
+        return valor;
+    }
+    
+
+   
+    
 }

@@ -1,38 +1,60 @@
 package co.edu.uniquindio.poo;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 public class Parqueadero {
     private final String nombre;
-    private static  int puestoI = 0;
-    private static  int puestoJ = 0;
-    private final  Collection<Vehiculo> listaVehiculos;
-    public Parqueadero(String nombre, int puestoI, int puestoJ) {
+    public Puesto puestos;
+    public Parqueadero(String nombre) {
         this.nombre = nombre;
-        Parqueadero.puestoI = puestoI;
-        Parqueadero.puestoJ = puestoJ;
-        this.listaVehiculos = new LinkedList<Vehiculo>();
+        
     }
     public String getNombre() {
         return nombre;
     }
-    public static int getPuestoI() {
-        return puestoI;
+    public Puesto getPuestos() {
+        return puestos;
     }
-    public static int getPuestoJ() {
-        return puestoJ;
-    }
-    
-    public static void setPuestoI(int puestoI) {
-        Parqueadero.puestoI = puestoI;
-    }
-    public static void setPuestoJ(int puestoJ) {
-        Parqueadero.puestoJ = puestoJ;
+    public void setPuestos(Puesto puestos) {
+        this.puestos = puestos;
     }
     @Override
     public String toString() {
-        return "Parqueadero [nombre=" + nombre + ", puestoI=" + puestoI + ", puestoJ=" + puestoJ + "]";
+        return "Parqueadero [nombre=" + nombre + ", puestos=" + puestos + "]";
     }
+    public void agregarPuestos(Puesto puestos) {
+        setPuestos(puestos);
+    }
+    public int calcularTarifa(String placa) {
+      //recorro la matriz y si  en esa matriz hay un elemnto con la misma placa que laque llego, optenga la tarifa de ese elemento y multiplicarla por la diferencoa entre el timpo que se va a retirar y la hora en la que llego 
+      int tarifa = 0;  
+      tarifa = puestos.obtenerTarifa(placa);
+      return tarifa;
     
+}
+    public String obtenerDueñoVehiculo(int fila, int columna) {
+       String dueño = "";
+       dueño = puestos.obtenerDueño(fila,columna);
+        return dueño;
+    }
+    public String obtenerVehiculoPuesto(int fila, int columna) {
+        String vehiculo = "";
+        vehiculo = puestos.obtenerVehiculo(fila,columna);
+         return vehiculo;
+    }
+    public String comprobarPuesto(int fila, int columna) {
+        String validacion = "";
+        validacion = puestos.obteterDisponibilidadPuesto(fila,columna);
+        return validacion;
+    }
+    public String obtenerRegistro() {
+        String registro = "";
+        registro = puestos.registro();
+        
+        return registro;
+    }
+    public void retirarVehiculo(String placa) {
+       puestos.retirarVehiculo(placa);
+
+       
+    }
+ 
 }

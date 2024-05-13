@@ -1,15 +1,23 @@
 package co.edu.uniquindio.poo;
 
-public class Moto extends Vehiculo{
-    private final String velocidad;
+import java.time.LocalTime;
 
-    public Moto(String placa, String modelo, String propietario, Puesto puesto, String velocidad) {
-        super(placa, modelo, propietario, puesto);
+public abstract class Moto extends Vehiculo {
+    private int velocidad;
+
+   
+
+    public Moto(String placa, String modelo, String propietario, LocalTime horaEntrada, int velocidad) {
+        super(placa, modelo, propietario, horaEntrada);
         this.velocidad = velocidad;
     }
 
-    public String getVelocidad() {
+    public int getVelocidad() {
         return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
     @Override
