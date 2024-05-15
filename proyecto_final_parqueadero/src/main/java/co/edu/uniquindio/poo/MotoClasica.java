@@ -29,6 +29,7 @@ public class MotoClasica extends Moto {
     }
 
     @Override
+    //Metodo para calcular la tarifa de una moto y retornarla
     protected int obtenerTarifa() {
        int valor = 0;
         long restaTiempo = ChronoUnit.HOURS.between(getHoraEntrada(),getHoraSalida());

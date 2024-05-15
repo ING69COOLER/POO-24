@@ -29,6 +29,7 @@ public class Carro extends Vehiculo {
     }
 
     @Override
+    //Metodo que calcula la tarifa del carro y regresa su valor en un entero "int"
     protected int obtenerTarifa( ) {
         int valor = 0;
         long restaTiempo = ChronoUnit.HOURS.between(getHoraEntrada(),getHoraSalida());
