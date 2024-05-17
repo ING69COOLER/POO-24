@@ -1,5 +1,6 @@
-package co.edu.uniquindio.poo;
+package co.edu.uniquindio.poo.clases;
 
+import java.time.LocalTime;
 
 public class Parqueadero {
     private final String nombre;
@@ -89,6 +90,10 @@ public class Parqueadero {
         String reporte;
         reporte = puestos.getListaReporte();
         return reporte;
+    }
+
+    public  void horaSalida(LocalTime horaSalida, String placa) {
+      puestos.horaSalida(horaSalida,placa);
     }
 
 }

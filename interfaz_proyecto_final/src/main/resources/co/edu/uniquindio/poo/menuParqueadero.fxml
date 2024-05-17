@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="536.0" prefWidth="626.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.ControlParqueaderoController">
+    <children>
+      <Pane prefHeight="510.0" prefWidth="574.0">
+         <children>
+              <Button fx:id="secondaryButton" layoutX="450.0" layoutY="472.0" onAction="#switchToPrimary" text="Switch to Primary View" />
+            <Label layoutX="241.0" layoutY="14.0" text="Menu parqueadero" textFill="#7b54e7">
+               <font>
+                  <Font name="Showcard Gothic" size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txtRegitroParqueadero" layoutX="32.0" layoutY="34.0" prefHeight="427.0" prefWidth="280.0" />
+            <Button fx:id="btnAgregarVehiculo" layoutX="357.0" layoutY="136.0" mnemonicParsing="false" onAction="#ventanaAgregarVehiculo" text="Agregar Vehiculo">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDespcharVehiculo" layoutX="349.0" layoutY="185.0" mnemonicParsing="false" onAction="#ventanaDespacho" text="Despachar Vehiculo">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnVerificarPuesto" layoutX="357.0" layoutY="233.0" mnemonicParsing="false" onAction="#ventanaVerificarPuesto" text="Verificar Puesto">
+               <font>
+                  <Font name="Showcard Gothic" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnObtenerPropietario" layoutX="345.0" layoutY="297.0" mnemonicParsing="false" onAction="#ventanaOptenerPropietario" text="Obtener Propietario">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnObtenerVehiculo" layoutX="358.0" layoutY="345.0" mnemonicParsing="false" onAction="#ventanaObtenerVehiculo" text="Obtener Vehiculo">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnRegistroDia" layoutX="345.0" layoutY="405.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnActivarRegistro" layoutX="357.0" layoutY="80.0" mnemonicParsing="false" onAction="#inicializarRegistro" text="Actualizar Lista">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font></Button>
+         </children>
+      </Pane>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

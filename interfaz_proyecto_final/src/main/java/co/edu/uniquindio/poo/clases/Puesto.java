@@ -1,12 +1,15 @@
-package co.edu.uniquindio.poo;
+package co.edu.uniquindio.poo.clases;
+
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
+
+
 
 public class Puesto {
     private final int fila;
     private final int columna;
-    private boolean estado;
     private Vehiculo[][] listaVehiculos;
     private String listaReporte;
 
@@ -25,13 +28,6 @@ public class Puesto {
         return fila;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
 
     public Vehiculo[][] getListaVehiculos() {
         return listaVehiculos;
@@ -43,7 +39,7 @@ public class Puesto {
 
     @Override
     public String toString() {
-        return "Puesto [j=" + columna + ", i=" + fila + ", estado=" + estado + ", listaVehiculos="
+        return "Puesto [j=" + columna + ", i=" + fila + ", estado=" +  ", listaVehiculos="
                 + Arrays.toString(listaVehiculos) + "]";
     }
 
@@ -77,7 +73,7 @@ public class Puesto {
         for (int i = 0; i < listaVehiculos.length; i++) {
             for (int j = 0; j < listaVehiculos.length; j++) {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
-                    System.out.println("se encomtro " + placa);
+                    System.out.println("se encontro " + placa);
                     tarifa = listaVehiculos[i][j].obtenerTarifa();
                     break;
                 }
@@ -123,9 +119,9 @@ public class Puesto {
         for (int i = 0; i < listaVehiculos.length; i++) {
             for (int j = 0; j < listaVehiculos.length; j++) {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j] == listaVehiculos[fila][columna]) {
-                    disponibilidad = " El puesto " + fila + "," + columna + " esta ocupado";
+                    disponibilidad = " El puesto " + (fila+1) + "," + (columna+1) + " esta ocupado";
                 } else if (listaVehiculos[i][j] == null && listaVehiculos[i][j] == listaVehiculos[fila][columna]) {
-                    disponibilidad = " El puesto " + fila + "," + columna + " esta libre";
+                    disponibilidad = " El puesto " + (fila+1) + "," + (columna+1) + " esta libre";
                 }
             }
         }
@@ -181,5 +177,20 @@ public class Puesto {
 
     public void setListaReporte(String listaReporte) {
         this.listaReporte = listaReporte;
+    }
+
+    public void horaSalida(LocalTime horaSalida, String placa) {
+       for (int i = 0; i < listaVehiculos.length; i++) {
+        for (int j = 0; j < listaVehiculos.length; j++) {
+            if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
+                listaVehiculos[i][j].setHoraSalida(horaSalida);
+                System.out.println("El vehiculo con las placas: "+placa+" fue despachado");
+                break;
+            }
+            else if(listaVehiculos[i][j] == null)
+                System.out.println("El vehiculo con las placas: "+placa+" no existe");
+                break;
+        }
+       }
     }
 }
