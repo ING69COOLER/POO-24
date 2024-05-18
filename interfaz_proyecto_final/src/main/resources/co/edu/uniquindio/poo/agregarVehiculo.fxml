@@ -63,9 +63,9 @@
             <TextField fx:id="txtTarifa" layoutX="112.0" layoutY="197.0" />
             <SplitMenuButton fx:id="spltTipoVehiculo" accessibleRole="COMBO_BOX" contentDisplay="BOTTOM" layoutX="219.0" layoutY="254.0" mnemonicParsing="false" onAction="#obtenerTIpo" text="Tipo Vehiculo">
                <items>
-                  <MenuItem fx:id="txObtenerMotoClasica" mnemonicParsing="false" text="obtenerTipoMotoClasica" />
-                  <MenuItem fx:id="txtObtenerCarro" mnemonicParsing="false" text="obtenerTipoCarro" />
-                  <MenuItem fx:id="txtObtenerMotoHibrida" mnemonicParsing="false" text="obtenerTipoMotoHibrida" />
+                  <MenuItem fx:id="txtObtenerCarro" text="carro" onAction="#handleTipoVehiculo"/>
+                  <MenuItem fx:id="txtObtenerMotoClasica" text="moto clásica" onAction="#handleTipoVehiculo"/>
+                  <MenuItem fx:id="txtObtenerMotoHibrida" text="moto híbrida" onAction="#handleTipoVehiculo"/>
                </items>
                <font>
                   <Font name="Showcard Gothic" size="15.0" />

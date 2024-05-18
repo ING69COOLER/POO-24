@@ -36,6 +36,8 @@ public abstract class Vehiculo {
                 + horaEntrada + "]";
     }
     protected abstract int obtenerTarifa( );
+
+    protected abstract int getTarifa();
     
     public LocalTime getHoraSalida() {
         return horaSalida;

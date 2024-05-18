@@ -96,4 +96,8 @@ public class Parqueadero {
       puestos.horaSalida(horaSalida,placa);
     }
 
+    public void agregarVehiculo(Vehiculo vehiculo) {
+        puestos.agregarVehiculo(vehiculo);
+    }
+
 }

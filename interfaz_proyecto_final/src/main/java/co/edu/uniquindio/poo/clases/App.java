@@ -17,10 +17,10 @@ public class App {
         bengala.agregarPuestos(puesto);
         System.out.println(bengala.obtenerRegistro());
 
- 
-        puesto.agregarVehiculo(carro_1);
-        puesto.agregarVehiculo(moto_1);
-        puesto.agregarVehiculo(moto_2);
+        bengala.agregarVehiculo(carro_1);
+      
+        bengala.agregarVehiculo(moto_1);
+        bengala.agregarVehiculo(moto_2);
        
        
        bengala.horaSalida(LocalTime.of(11, 30, 0),"PTA-200");

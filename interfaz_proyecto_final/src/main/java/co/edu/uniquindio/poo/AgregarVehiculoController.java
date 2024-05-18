@@ -2,8 +2,14 @@ package co.edu.uniquindio.poo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.clases.Carro;
+import co.edu.uniquindio.poo.clases.MotoClasica;
+import co.edu.uniquindio.poo.clases.MotoHibrida;
 import co.edu.uniquindio.poo.clases.Parqueadero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +21,9 @@ import javafx.scene.control.TextField;
 public class AgregarVehiculoController {
     private static AgregarVehiculoController agregarVehiculoController;
     private Parqueadero parqueadero;
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-    private AgregarVehiculoController() {
+    public AgregarVehiculoController() {
         // Deja este constructor privado para evitar múltiples instancias
     }
 
@@ -26,17 +33,24 @@ public class AgregarVehiculoController {
         }
         return agregarVehiculoController;
     }
-
+    //Metdoodo que recibe "parqueadero" de la clase ""ControlParqeuadero"
     @SuppressWarnings("exports")
-    public void recibirParqueadero(Parqueadero parqueaderoActualizado) {
-        parqueadero = parqueaderoActualizado;
+    public void recibirParqueadero(Parqueadero parqueadero) {
         if (parqueadero != null) {
-            System.out.println(parqueadero.getNombre());
+            System.out.println("Parqueadero recibido en AgregarVehiculoController: " + parqueadero.getNombre());
+            this.parqueadero=parqueadero;
+            System.out.println(parqueadero.obtenerRegistro());
         } else {
-            System.out.println("El objeto parqueadero es null");
+            System.out.println("El objeto parqueadero es null en AgregarVehiculoController");
         }
     }
-
+    @FXML
+    void handleTipoVehiculo(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String tipoVehiculo = menuItem.getText();
+        spltTipoVehiculo.setText(tipoVehiculo); // Actualiza el texto del SplitMenuButton con la selección
+        System.out.println("Tipo de Vehículo seleccionado: " + tipoVehiculo);
+    }
     @FXML
     private ResourceBundle resources;
 
@@ -51,9 +65,19 @@ public class AgregarVehiculoController {
 
     @FXML
     private SplitMenuButton spltTipoVehiculo;
-
+    
     @FXML
-    private MenuItem txObtenerMotoClasica;
+    private MenuItem txtObtenerCarro;
+    
+    @FXML
+    private MenuItem txtObtenerMotoClasica;
+    
+    @FXML
+    private MenuItem txtObtenerMotoHibrida;
+    
+
+
+ 
 
     @FXML
     private TextField txtHoraEntrada;
@@ -61,11 +85,8 @@ public class AgregarVehiculoController {
     @FXML
     private TextField txtModelo;
 
-    @FXML
-    private MenuItem txtObtenerCarro;
 
-    @FXML
-    private MenuItem txtObtenerMotoHibrida;
+   
 
     @FXML
     private TextField txtPlaca;
@@ -81,7 +102,34 @@ public class AgregarVehiculoController {
 
     @FXML
     void agregarVehiculo(ActionEvent event) {
-        // Implementar lógica para agregar vehículo
+        parqueadero = agregarVehiculoController.parqueadero;
+        String tipo = spltTipoVehiculo.getText();
+        String nombrePropietario = txtPropietario.getText();
+        String placa = txtPlaca.getText();
+        String modelo = txtModelo.getText();
+        int tarifa = Integer.parseInt(txtTarifa.getText());
+        String horaEntradaStr = txtHoraEntrada.getText();
+        LocalTime horaEntrada = LocalTime.parse(horaEntradaStr, timeFormatter);
+        int velocidad = Integer.parseInt(txtVelocidad.getText());
+        if(tipo.equals("carro") ){
+            Carro carro = new Carro(placa, modelo, nombrePropietario, horaEntrada, tarifa);
+            parqueadero.agregarVehiculo(carro);
+            System.out.println(parqueadero.obtenerRegistro());
+            System.out.println("Agregar vehículo de tipo: " + tipo);
+        }
+        else if(tipo.equals("moto clásica")){
+            MotoClasica motoClasica = new MotoClasica(placa, modelo, nombrePropietario, horaEntrada, velocidad,tarifa );
+            parqueadero.agregarVehiculo(motoClasica);
+            System.out.println(parqueadero.obtenerRegistro());
+            System.out.println("Agregar vehículo de tipo: " + tipo);
+        }
+        else if(tipo.equals("moto híbrida")){
+           MotoHibrida motoHibrida = new MotoHibrida(placa, modelo, nombrePropietario, horaEntrada, velocidad, tarifa);
+            parqueadero.agregarVehiculo(motoHibrida);
+            System.out.println(parqueadero.obtenerRegistro());
+            System.out.println("Agregar vehículo de tipo: " + tipo);
+        }
+       
     }
 
     @FXML
@@ -91,7 +139,9 @@ public class AgregarVehiculoController {
 
     @FXML
     void regresar() throws IOException {
+        parqueadero=agregarVehiculoController.parqueadero;
         ControlParqueaderoController.getcontrolParqueaderoController().recibirParqueadero(parqueadero);
+        System.out.println("Parqueadero enviado a ControlParqueadero");
         App.setRoot("menuParqueadero");
     }
 }

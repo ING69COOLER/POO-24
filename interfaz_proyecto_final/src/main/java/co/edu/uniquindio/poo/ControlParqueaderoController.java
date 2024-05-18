@@ -20,18 +20,23 @@ public class ControlParqueaderoController {
     public ControlParqueaderoController() {
 
     }
-
+    //metodo singleton
     public static ControlParqueaderoController getcontrolParqueaderoController() {
         if (controlParqueaderoController == null) {
             controlParqueaderoController = new ControlParqueaderoController();
         }
         return controlParqueaderoController;
     }
-
+    //metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
     @SuppressWarnings("exports")
     public void recibirParqueadero(Parqueadero parqueaderoActualizado) {
-        parqueadero = parqueaderoActualizado;
-        System.out.println(parqueadero.getNombre());
+        this.parqueadero = parqueaderoActualizado;
+        if (parqueadero != null) {
+            System.out.println("Recibido parqueadero en ControlParqueadero: " + parqueadero.getNombre());
+            
+        } else {
+            System.out.println("El objeto parqueadero es null al recibirlo");
+        }
     }
 
     @FXML
@@ -66,7 +71,7 @@ public class ControlParqueaderoController {
 
     @FXML
     private TextArea txtRegitroParqueadero;
-
+    //Meotdo para obtener el registro del parqueadero
     @FXML
     void inicializarRegistro(ActionEvent event) {
         txtRegitroParqueadero
@@ -78,16 +83,18 @@ public class ControlParqueaderoController {
     private void switchToPrimary() throws IOException {
         App.setRoot("crearParqueadero");
     }
-
+    //Boton para agregar vehiculo, el cual envia "parqueadero" a la clase "agregar vehiculo"
     @FXML
     void ventanaAgregarVehiculo() throws IOException {
-        if (parqueadero != null) {
+        System.out.println(controlParqueaderoController.parqueadero.getNombre());
+        if (controlParqueaderoController.parqueadero != null) {
+            System.out.println("Pasando parqueadero a AgregarVehiculoController: " + controlParqueaderoController.parqueadero.getNombre());
+            parqueadero = controlParqueaderoController.parqueadero;
             AgregarVehiculoController.getaAgregarVehiculoController().recibirParqueadero(parqueadero);
             App.setRoot("agregarVehiculo");
         } else {
             System.out.println("El objeto parqueadero es null. No se puede abrir la ventana de agregar vehículo.");
         }
-        
     }
 
     @FXML

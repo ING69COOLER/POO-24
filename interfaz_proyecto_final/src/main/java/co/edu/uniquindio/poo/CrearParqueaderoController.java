@@ -32,7 +32,7 @@ public class CrearParqueaderoController {
 
     @FXML
     private TextField txtFila;
-
+    //se crea el parqueadero y se envia al menu parqueadero
     @FXML
     private void switchToSecondary() throws IOException {
         String nombreParqueadero = txNombreParqueadero.getText();

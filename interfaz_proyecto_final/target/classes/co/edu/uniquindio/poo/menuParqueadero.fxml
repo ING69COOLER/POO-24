@@ -18,38 +18,38 @@
                   <Font name="Showcard Gothic" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtRegitroParqueadero" layoutX="32.0" layoutY="34.0" prefHeight="427.0" prefWidth="280.0" />
-            <Button fx:id="btnAgregarVehiculo" layoutX="357.0" layoutY="136.0" mnemonicParsing="false" onAction="#ventanaAgregarVehiculo" text="Agregar Vehiculo">
+            <TextArea fx:id="txtRegitroParqueadero" layoutX="-3.0" layoutY="34.0" prefHeight="185.0" prefWidth="586.0" />
+            <Button fx:id="btnAgregarVehiculo" layoutX="51.0" layoutY="269.0" mnemonicParsing="false" onAction="#ventanaAgregarVehiculo" text="Agregar Vehiculo">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnDespcharVehiculo" layoutX="349.0" layoutY="185.0" mnemonicParsing="false" onAction="#ventanaDespacho" text="Despachar Vehiculo">
+            <Button fx:id="btnDespcharVehiculo" layoutX="359.0" layoutY="269.0" mnemonicParsing="false" onAction="#ventanaDespacho" text="Despachar Vehiculo">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnVerificarPuesto" layoutX="357.0" layoutY="233.0" mnemonicParsing="false" onAction="#ventanaVerificarPuesto" text="Verificar Puesto">
+            <Button fx:id="btnVerificarPuesto" layoutX="50.0" layoutY="375.0" mnemonicParsing="false" onAction="#ventanaVerificarPuesto" text="Verificar Puesto">
                <font>
                   <Font name="Showcard Gothic" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="btnObtenerPropietario" layoutX="345.0" layoutY="297.0" mnemonicParsing="false" onAction="#ventanaOptenerPropietario" text="Obtener Propietario">
+            <Button fx:id="btnObtenerPropietario" layoutX="38.0" layoutY="325.0" mnemonicParsing="false" onAction="#ventanaOptenerPropietario" text="Obtener Propietario">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnObtenerVehiculo" layoutX="358.0" layoutY="345.0" mnemonicParsing="false" onAction="#ventanaObtenerVehiculo" text="Obtener Vehiculo">
+            <Button fx:id="btnObtenerVehiculo" layoutX="357.0" layoutY="325.0" mnemonicParsing="false" onAction="#ventanaObtenerVehiculo" text="Obtener Vehiculo">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnRegistroDia" layoutX="345.0" layoutY="405.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
+            <Button fx:id="btnRegistroDia" layoutX="344.0" layoutY="376.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnActivarRegistro" layoutX="357.0" layoutY="80.0" mnemonicParsing="false" onAction="#inicializarRegistro" text="Actualizar Lista">
+            <Button fx:id="btnActivarRegistro" layoutX="216.0" layoutY="234.0" mnemonicParsing="false" onAction="#inicializarRegistro" text="Actualizar Lista">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font></Button>
