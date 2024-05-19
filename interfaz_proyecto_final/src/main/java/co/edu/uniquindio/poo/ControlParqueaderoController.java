@@ -55,19 +55,7 @@ public class ControlParqueaderoController {
     private Button btnDespcharVehiculo;
 
     @FXML
-    private Button btnObtenerPropietario;
-
-    @FXML
-    private Button btnObtenerVehiculo;
-
-    @FXML
     private Button btnRegistroDia;
-
-    @FXML
-    private Button btnVerificarPuesto;
-
-    @FXML
-    private Button secondaryButton;
 
     @FXML
     private TextArea txtRegitroParqueadero;
@@ -92,6 +80,7 @@ public class ControlParqueaderoController {
             parqueadero = controlParqueaderoController.parqueadero;
             AgregarVehiculoController.getaAgregarVehiculoController().recibirParqueadero(parqueadero);
             App.setRoot("agregarVehiculo");
+            
         } else {
             System.out.println("El objeto parqueadero es null. No se puede abrir la ventana de agregar vehículo.");
         }
@@ -99,34 +88,24 @@ public class ControlParqueaderoController {
 
     @FXML
     void ventanaDespacho( ) throws IOException {
-       
-        if(controlParqueaderoController.parqueadero != null){
+       if(controlParqueaderoController.parqueadero != null){
+        parqueadero = controlParqueaderoController.parqueadero;
+        DespacharVehiculoController.getDespacharVehiculoController().recibirParqueadero(parqueadero);
+        App.setRoot("despachar");
+       }else{
+        System.out.println("El objeto es null. No se puede abrir la ventana deschar");
+       }
+    }
+
+    
+
+    @FXML
+    void ventanaRegistroDia() throws IOException {
+        if(controlParqueaderoController !=null){
             parqueadero = controlParqueaderoController.parqueadero;
-            DespacharVehiculoController.getDespacharVehiculoController().recibirParqueadero(parqueadero);
-            App.setRoot("depacharVehiculo");
-        }else{
-            System.out.println("El objeto parqueadero es nulo");
+            ObtenerRegistroDia.getObtenerRegistroDia().recibirParqueadero(parqueadero);
+            App.setRoot("obtenerRegistro");
         }
-    }
-
-    @FXML
-    void ventanaObtenerVehiculo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ventanaOptenerPropietario(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ventanaRegistroDia(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ventanaVerificarPuesto(ActionEvent event) {
-
     }
 
 }

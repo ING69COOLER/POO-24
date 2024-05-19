@@ -20,6 +20,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
+        <!-- Agrega otros módulos de JavaFX según sea necesario -->
     </dependencies>
     <build>
         <plugins>
@@ -34,7 +35,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.6</version>
+                <version>0.0.4</version>
                 <executions>
                     <execution>
                         <!-- Default configuration for running -->

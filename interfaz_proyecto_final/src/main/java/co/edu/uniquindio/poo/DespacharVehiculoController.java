@@ -1,8 +1,7 @@
 package co.edu.uniquindio.poo;
-
 import java.io.IOException;
-import java.lang.annotation.Retention;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -18,17 +17,19 @@ public class DespacharVehiculoController {
     private static DespacharVehiculoController despacharVehiculoController;
     private Parqueadero parqueadero;
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-    public DespacharVehiculoController(){
-        
-    }
 
-    public static DespacharVehiculoController getDespacharVehiculoController(){
-        if(despacharVehiculoController == null){
+
+    public DespacharVehiculoController(){
+
+    }
+    //metodo singleton
+    public static DespacharVehiculoController getDespacharVehiculoController() {
+        if (despacharVehiculoController == null) {
             despacharVehiculoController = new DespacharVehiculoController();
         }
         return despacharVehiculoController;
     }
-    //metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
+        //metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
     @SuppressWarnings("exports")
     public void recibirParqueadero(Parqueadero parqueaderoActualizado) {
         this.parqueadero = parqueaderoActualizado;
@@ -40,7 +41,6 @@ public class DespacharVehiculoController {
         }
     }
 
-    
     @FXML
     private ResourceBundle resources;
 
@@ -48,7 +48,7 @@ public class DespacharVehiculoController {
     private URL location;
 
     @FXML
-    private Button btnCalculartarifa;
+    private Button btnCalcularTarifa;
 
     @FXML
     private Button btnRegistro;
@@ -57,7 +57,10 @@ public class DespacharVehiculoController {
     private Button btnRegresar;
 
     @FXML
-    private TextField txtHoraSalida;
+    private TextField txtHorasalida;
+
+    @FXML
+    private TextArea txtPago;
 
     @FXML
     private TextField txtPlaca;
@@ -66,36 +69,33 @@ public class DespacharVehiculoController {
     private TextArea txtRegistro;
 
     @FXML
-    private TextArea txtTotalPago;
-
-
-    @FXML
     void calcularTarifa(ActionEvent event) {
         parqueadero = despacharVehiculoController.parqueadero;
-        String placa  = txtPlaca.getText();
-        String horaSalidaStr = txtHoraSalida.getText();
-        LocalTime horaSaida = LocalTime.parse(horaSalidaStr, timeFormatter);
-        parqueadero.horaSalida(horaSaida, placa);
-        txtTotalPago.setText(parqueadero.calcularTarifa(placa));
-        
-        parqueadero.retirarVehiculo(placa);
-
+        String placa = txtPlaca.getText();
+        String horaSalidastr = txtHorasalida.getText();
+        LocalTime horasalida = LocalTime.parse(horaSalidastr,timeFormatter);
+        if(placa != null && horaSalidastr != null){
+            parqueadero.horaSalida(horasalida, placa);
+            txtPago.setText(parqueadero.calcularTarifa(placa));
+            parqueadero.retirarVehiculo(placa);
+            
+        }
     }
 
     @FXML
-    void regresar( ) throws IOException {
+    void registro(ActionEvent event) {
+        parqueadero=despacharVehiculoController.parqueadero;
+       txtRegistro.setText( parqueadero.obtenerRegistro());
+    }
+
+    @FXML
+    void regresar() throws IOException {
         parqueadero=despacharVehiculoController.parqueadero;
         ControlParqueaderoController.getcontrolParqueaderoController().recibirParqueadero(parqueadero);
         System.out.println("Parqueadero enviado a ControlParqueadero");
         App.setRoot("menuParqueadero");
     }
 
-    @FXML
-    void regitro(ActionEvent event){
-        txtRegistro
-        .setText(DespacharVehiculoController.getDespacharVehiculoController().parqueadero.obtenerRegistro());
+ }
 
 
-    }
-    
-}
