@@ -3,6 +3,8 @@ package co.edu.uniquindio.poo;
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.clases.Parqueadero;
@@ -14,7 +16,7 @@ import javafx.scene.control.TextField;
 public class DespacharVehiculoController {
     private static DespacharVehiculoController despacharVehiculoController;
     private Parqueadero parqueadero;
-
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     public DespacharVehiculoController(){
         
     }
@@ -60,6 +62,14 @@ public class DespacharVehiculoController {
 
     @FXML
     void calcularTarifa(ActionEvent event) {
+        parqueadero = despacharVehiculoController.parqueadero;
+        String placa  = txtPlaca.getText();
+        String horaSalidaStr = txtHoraSalida.getText();
+        LocalTime horaSaida = LocalTime.parse(horaSalidaStr, timeFormatter);
+        parqueadero.horaSalida(horaSaida, placa);
+        txTarifa.setText(parqueadero.calcularTarifa(placa));
+        
+        parqueadero.retirarVehiculo(placa);
 
     }
 

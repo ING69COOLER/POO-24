@@ -165,7 +165,7 @@ public class Puesto {
             for (int j = 0; j < listaVehiculos[i].length; j++) {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
                     listaVehiculos[i][j] = null;
-                    System.out.println("se encomtro y retiro: " + placa);
+                    System.out.println("se encontro y retiro: " + placa);
                    
                     break;
                 }
