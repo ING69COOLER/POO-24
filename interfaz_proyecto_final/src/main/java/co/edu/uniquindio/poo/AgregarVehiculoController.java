@@ -110,7 +110,7 @@ public class AgregarVehiculoController {
         int tarifa = Integer.parseInt(txtTarifa.getText());
         String horaEntradaStr = txtHoraEntrada.getText();
         LocalTime horaEntrada = LocalTime.parse(horaEntradaStr, timeFormatter);
-        int velocidad = Integer.parseInt(txtVelocidad.getText());
+       
         if(tipo.equals("carro") ){
             Carro carro = new Carro(placa, modelo, nombrePropietario, horaEntrada, tarifa);
             parqueadero.agregarVehiculo(carro);
@@ -118,13 +118,15 @@ public class AgregarVehiculoController {
             System.out.println("Agregar vehículo de tipo: " + tipo);
         }
         else if(tipo.equals("moto clásica")){
+            int velocidad = Integer.parseInt(txtVelocidad.getText());
             MotoClasica motoClasica = new MotoClasica(placa, modelo, nombrePropietario, horaEntrada, velocidad,tarifa );
             parqueadero.agregarVehiculo(motoClasica);
             System.out.println(parqueadero.obtenerRegistro());
             System.out.println("Agregar vehículo de tipo: " + tipo);
         }
         else if(tipo.equals("moto híbrida")){
-           MotoHibrida motoHibrida = new MotoHibrida(placa, modelo, nombrePropietario, horaEntrada, velocidad, tarifa);
+            int velocidad = Integer.parseInt(txtVelocidad.getText());
+            MotoHibrida motoHibrida = new MotoHibrida(placa, modelo, nombrePropietario, horaEntrada, velocidad, tarifa);
             parqueadero.agregarVehiculo(motoHibrida);
             System.out.println(parqueadero.obtenerRegistro());
             System.out.println("Agregar vehículo de tipo: " + tipo);

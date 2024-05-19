@@ -6,12 +6,14 @@ import java.time.temporal.ChronoUnit;
 
 public class Carro extends Vehiculo {
     private int tarifa;
+    private  int reporte;
 
     
 
     public Carro(String placa, String modelo, String propietario, LocalTime horaEntrada, int tarifa) {
         super(placa, modelo, propietario, horaEntrada);
         this.tarifa = tarifa;
+        this.reporte = 0;
     }
 
     public int getTarifa() {
@@ -37,6 +39,7 @@ public class Carro extends Vehiculo {
             long restaTiempo = ChronoUnit.HOURS.between(getHoraEntrada(),getHoraSalida());
             int tiempoTotal = (int) restaTiempo;
             valor = tarifa*(tiempoTotal);
+            reporte = reporte +valor;
             
         }
         else if (getHoraSalida() == null){
@@ -45,6 +48,10 @@ public class Carro extends Vehiculo {
        
         return valor;
     }
+
+   
+
+    
 
     
 

@@ -43,6 +43,8 @@ public class MotoHibrida extends Moto {
         valor = tarifa*(tiempoTotal);
         return valor;
     }
+
+   
     
 
    

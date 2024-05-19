@@ -84,20 +84,37 @@ public class Parqueadero {
 
     }
 
-    // Metodo que llma a otro metodo en la clase "puesto " para asi obtener el
-    // reporte del dia del parqueadero
-    public String obtenerReporteDia() {
-        String reporte;
-        reporte = puestos.getListaReporte();
-        return reporte;
-    }
-
+   
     public  void horaSalida(LocalTime horaSalida, String placa) {
       puestos.horaSalida(horaSalida,placa);
     }
 
     public void agregarVehiculo(Vehiculo vehiculo) {
         puestos.agregarVehiculo(vehiculo);
+    }
+
+    public String obtenerReporteDia() {
+       String reporte = "";
+       reporte = obtenerReporteCarro()+"\n"+obtenerReporteMotoClasica()+"\n"+obtenerReporteMotoHibrida();
+       return reporte;
+    }
+
+    private String obtenerReporteMotoHibrida() {
+        String reporte ="";
+        reporte = puestos.obtenerReporteMotoHibrida();
+        return reporte;
+    }
+
+    private String obtenerReporteMotoClasica() {
+        String reporte ="";
+        reporte = puestos.obtenerReporteMotoClasica();
+        return reporte;
+    }
+
+    private String obtenerReporteCarro() {
+        String reporte = "";
+        reporte = puestos.obtenerReporteCarro();
+        return reporte;
     }
 
 }

@@ -98,8 +98,15 @@ public class ControlParqueaderoController {
     }
 
     @FXML
-    void ventanaDespacho(ActionEvent event) {
-
+    void ventanaDespacho( ) throws IOException {
+       
+        if(controlParqueaderoController.parqueadero != null){
+            parqueadero = controlParqueaderoController.parqueadero;
+            DespacharVehiculoController.getDespacharVehiculoController().recibirParqueadero(parqueadero);
+            App.setRoot("depacharVehiculo");
+        }else{
+            System.out.println("El objeto parqueadero es nulo");
+        }
     }
 
     @FXML

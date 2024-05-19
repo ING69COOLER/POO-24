@@ -8,13 +8,19 @@ public class Puesto {
     private final int fila;
     private final int columna;
     private Vehiculo[][] listaVehiculos;
-    private String listaReporte;
+    private int reporteTotalCarro;
+    private int reporteTotalMotoClasica;
+    private int reporteTotalMotoHibrida;
+    
 
     public Puesto(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
         this.listaVehiculos = new Vehiculo[fila][columna];
-        this.listaReporte = "";
+        this.reporteTotalCarro=0;
+        this.reporteTotalMotoClasica=0;
+        this.reporteTotalMotoHibrida=0;
+       
     }
 
     public int getJ() {
@@ -48,7 +54,7 @@ public class Puesto {
                     listaVehiculos[i][j] = vehiculo;
                     System.out.println("Se ha agregado exitosamente el vehículo " + vehiculo + " en la fila " + i
                             + ", columna " + j);
-                    reporteDia();
+                    
                     vehiculoAgregado = true;
                     break; // Salir del bucle interno una vez que se haya agregado el vehículo
                 } else {
@@ -71,7 +77,21 @@ public class Puesto {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
                     System.out.println("se encontro " + placa);
                     tarifa = listaVehiculos[i][j].obtenerTarifa();
+                    if(listaVehiculos[i][j] instanceof Carro){
+                        reporteTotalCarro = reporteTotalCarro + tarifa;
+                        System.out.println("El total que va es de "+reporteTotalCarro);
+                    }
+                    else if(listaVehiculos[i][j] instanceof MotoClasica){
+                        reporteTotalMotoClasica = reporteTotalMotoClasica + tarifa;
+                        System.out.println("El total que va es de "+reporteTotalMotoClasica);
+                    }
+                    else if(listaVehiculos[i][j] instanceof MotoHibrida){
+                        reporteTotalMotoHibrida = reporteTotalMotoHibrida + tarifa;
+                    }
+
+                    
                     break;
+                    
                 }
             }
         }
@@ -131,7 +151,7 @@ public class Puesto {
     public String registro() {
         String registro = "";
         for (int i = 0; i < listaVehiculos.length; i++) {
-            for (int j = 0; j < listaVehiculos.length; j++) {
+            for (int j = 0; j < listaVehiculos[i].length; j++) {
                 registro = registro + obteterDisponibilidadPuesto(i, j)
                         + obtenerDueño(i, j) + obtenerVehiculo(i, j) + "\n";
             }
@@ -142,11 +162,11 @@ public class Puesto {
     // Metodo para retirar un vehicuo de la matriz
     public void retirarVehiculo(String placa) {
         for (int i = 0; i < listaVehiculos.length; i++) {
-            for (int j = 0; j < listaVehiculos.length; j++) {
+            for (int j = 0; j < listaVehiculos[i].length; j++) {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
                     listaVehiculos[i][j] = null;
                     System.out.println("se encomtro y retiro: " + placa);
-                    reporteDia();
+                   
                     break;
                 }
             }
@@ -154,41 +174,49 @@ public class Puesto {
 
     }
 
-    // Metodo para obtener el reporte del dia de los movimientos de los vehiculos
-    // del parqueadero
-    public void reporteDia() {
-        String reporte = "Hubo movimiento a la hora:  " + LocalDateTime.now() + "\n";
-        for (int i = 0; i < listaVehiculos.length; i++) {
-            for (int j = 0; j < listaVehiculos.length; j++) {
-                if (listaVehiculos[i][j] != null) {
-                    reporte = reporte + listaVehiculos[i][j].toString() + "\n";
-                } else if (listaVehiculos[i][j] == null) {
-                    reporte = reporte + "Puesto vacio." + "\n";
-                }
-            }
-        }
-        listaReporte = listaReporte + reporte;
-    }
-
-    public String getListaReporte() {
-        return listaReporte;
-    }
-
-    public void setListaReporte(String listaReporte) {
-        this.listaReporte = listaReporte;
-    }
-
+    
     public void horaSalida(LocalTime horaSalida, String placa) {
-        for (int i = 0; i < listaVehiculos.length; i++) {
-            for (int j = 0; j < listaVehiculos.length; j++) {
+        boolean vehiculoEncontrado = false;
+
+        // Recorre la matriz de vehículos para buscar el vehículo con la placa especificada
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
                 if (listaVehiculos[i][j] != null && listaVehiculos[i][j].getPlaca().equals(placa)) {
+                    // Si se encuentra el vehículo, establece la hora de salida y marca que se encontró
                     listaVehiculos[i][j].setHoraSalida(horaSalida);
+                    vehiculoEncontrado = true;
                     System.out.println("El vehiculo con las placas: " + placa + " fue despachado");
-                    break;
-                } else if (listaVehiculos[i][j] == null)
-                    System.out.println("El vehiculo con las placas: " + placa + " no existe");
-                break;
+                    break; // Sale del bucle interno porque ya encontró el vehículo
+                }
+            }
+            if (vehiculoEncontrado) {
+                break; // Sale del bucle externo si ya se encontró el vehículo
             }
         }
+    
+        // Si no se encontró el vehículo, muestra un mensaje de que no existe
+        if (!vehiculoEncontrado) {
+            System.out.println("El vehiculo con las placas: " + placa + " no existe");
+        }
     }
+
+  
+    public String obtenerReporteCarro() {
+        String reporte = "";
+       reporte = "El total recaudados por los Carros es de: "+ reporteTotalCarro;
+        return reporte;
+    }
+
+    public String obtenerReporteMotoClasica() {
+        String reporte = "";
+       reporte = "El total recaudados por las motos clasicas es de: "+ reporteTotalMotoClasica;
+        return reporte;
+    }
+
+    public String obtenerReporteMotoHibrida() {
+        String reporte = "";
+        reporte = "El total recaudados por las motos hibridas es de: "+ reporteTotalMotoHibrida;
+         return reporte;
+    }
+    
 }
