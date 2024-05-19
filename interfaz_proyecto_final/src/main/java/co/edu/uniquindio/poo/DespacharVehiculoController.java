@@ -11,6 +11,7 @@ import co.edu.uniquindio.poo.clases.Parqueadero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class DespacharVehiculoController {
@@ -39,6 +40,7 @@ public class DespacharVehiculoController {
         }
     }
 
+    
     @FXML
     private ResourceBundle resources;
 
@@ -46,13 +48,13 @@ public class DespacharVehiculoController {
     private URL location;
 
     @FXML
-    private Button btnCalcularTarifa;
+    private Button btnCalculartarifa;
+
+    @FXML
+    private Button btnRegistro;
 
     @FXML
     private Button btnRegresar;
-
-    @FXML
-    private TextField txTarifa;
 
     @FXML
     private TextField txtHoraSalida;
@@ -61,13 +63,20 @@ public class DespacharVehiculoController {
     private TextField txtPlaca;
 
     @FXML
+    private TextArea txtRegistro;
+
+    @FXML
+    private TextArea txtTotalPago;
+
+
+    @FXML
     void calcularTarifa(ActionEvent event) {
         parqueadero = despacharVehiculoController.parqueadero;
         String placa  = txtPlaca.getText();
         String horaSalidaStr = txtHoraSalida.getText();
         LocalTime horaSaida = LocalTime.parse(horaSalidaStr, timeFormatter);
         parqueadero.horaSalida(horaSaida, placa);
-        txTarifa.setText(parqueadero.calcularTarifa(placa));
+        txtTotalPago.setText(parqueadero.calcularTarifa(placa));
         
         parqueadero.retirarVehiculo(placa);
 
@@ -81,5 +90,12 @@ public class DespacharVehiculoController {
         App.setRoot("menuParqueadero");
     }
 
+    @FXML
+    void regitro(ActionEvent event){
+        txtRegistro
+        .setText(DespacharVehiculoController.getDespacharVehiculoController().parqueadero.obtenerRegistro());
+
+
+    }
     
 }
