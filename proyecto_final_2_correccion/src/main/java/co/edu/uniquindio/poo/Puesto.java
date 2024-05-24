@@ -36,24 +36,33 @@ public class Puesto {
     public void setListaReporte(String listaReporte) {
         this.listaReporte = listaReporte;
     }
-
-    // Metodo que agrega un vehiculo nuevo a la matriz de puestos
-    public void agregarVehiculo(Vehiculo vehiculo, int fila, int columna) {
-        boolean vehiculoAgregado = false;
-        for (int i = 0; i < fila; i++) {
-            for (int j = 0; j < columna; j++) {
-                if (listaPuestos[i][j].equals(listaPuestos[fila][columna])) {
-                    listaPuestos[i][j] = vehiculo;
-                    vehiculoAgregado = true;
-                } else {
-                    System.out.println("No hay espacio disponible para estacionar el vehículo " + vehiculo + "en fila: "
-                            + i + ", columna: " + j);
+    //Metodo para agregar un vehiculo a un puesto en especifico 
+    public void agregarVehiculo(Vehiculo vehiculo, int filaAñadir, int columnaAñadir) {
+        if (filaAñadir < fila && columnaAñadir < columna) {
+            if (listaPuestos[filaAñadir][columnaAñadir] == null) {
+                boolean placaDuplicada = false;
+                for (int i = 0; i < listaPuestos.length; i++) {
+                    for (int j = 0; j < listaPuestos[i].length; j++) {
+                        if (listaPuestos[i][j] != null && listaPuestos[i][j].getPlaca().equals(vehiculo.getPlaca())) {
+                            placaDuplicada = true;
+                            break;
+                        }
+                    }
+                    if (placaDuplicada) {
+                        break;
+                    }
                 }
+                if (!placaDuplicada) {
+                    listaPuestos[filaAñadir][columnaAñadir] = vehiculo;
+                    System.out.println("Vehículo agregado: " + vehiculo.getModelo() + " en fila: " + filaAñadir + ", columna: " + columnaAñadir);
+                } else {
+                    System.out.println("El vehículo con placa " + vehiculo.getPlaca() + " ya está estacionado en otro puesto.");
+                }
+            } else {
+                System.out.println("El espacio en fila: " + filaAñadir + ", columna: " + columnaAñadir + " está ocupado.");
             }
-            if (vehiculoAgregado) {
-                break; // Salir del bucle externo si el vehículo se agregó exitosamente
-            }
+        } else {
+            System.out.println("Posición fuera de los límites de la matriz.");
         }
-
     }
 }

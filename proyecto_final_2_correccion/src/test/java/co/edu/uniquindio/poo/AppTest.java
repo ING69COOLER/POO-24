@@ -28,9 +28,10 @@ public class AppTest {
         parqueadero.agregarPuestos(puestos);
         
         Propietario propietario_1 = new Propietario("Manuel", "1092455543", "304579300");
-        Carro carro_1 = new Carro("PTA-234", "Camaro", propietario_1, Tarifa.CARRO);
+        MotoClasica motoClasica = new MotoClasica("PTA-23E", "2020", propietario_1, Tarifa.MOTO_CLASICA,100);
+        //Carro carro_1 = new Carro("PTA-234", "Camaro 2024", propietario_1, Tarifa.CARRO, "Chevrolet");
 
-        Registro registro = new Registro(carro_1);
+        Registro registro = new Registro(motoClasica);
         parqueadero.agregarRegistro(registro);
 
         parqueadero.agregarVehiculoPuesto("PTA-234");
