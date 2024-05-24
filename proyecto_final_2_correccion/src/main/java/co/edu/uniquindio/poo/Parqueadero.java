@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -71,10 +72,11 @@ public class Parqueadero {
     }
 
     // Metodo para agregar un vehiculo a un puesto del parqueadero
-    public void agregarVehiculoPuesto(String placa) {
+    public void agregarVehiculoPuesto(String placa,LocalTime horaEntrada) {
         for (Registro registro : registros) {
             if (registro != null && registro.getVehiculo().getPlaca().equals(placa)) {
                 Vehiculo vehiculo = registro.getVehiculo();
+                registro.setHoraEntrada(horaEntrada);
                 boolean vehiculoAgregado = false;
                 for (int i = 0; i < puestos.getListPuestos().length; i++) {
                     for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
@@ -127,4 +129,57 @@ public class Parqueadero {
         return registroVehiculo;
 
     }
+
+    public String obtenerVehiculoMediantePuesto(int fila_2, int columna_2) {
+        String vehiculoEncontrado = "";
+        int fila = fila_2 - 1;
+        int columna = columna_2 - 1;
+    
+        // Verificar si las coordenadas están dentro de los límites del array
+        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0 || columna >= puestos.getListPuestos()[fila].length) {
+            return "El puesto indicado está fuera de los límites.";
+        }
+    
+        for (int i = 0; i < puestos.getListPuestos().length; i++) {
+            for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
+                if (i == fila && j == columna) {
+                    if (puestos.getListPuestos()[i][j] != null && puestos.getListPuestos()[i][j] != null) {
+                        vehiculoEncontrado = "El vehículo en el puesto " + (i + 1) + "," + (j + 1) + " es " + puestos.getListPuestos()[i][j].getModelo();
+                    } else {
+                        vehiculoEncontrado = "Este puesto está libre.";
+                    }
+                    return vehiculoEncontrado; // Salir del bucle una vez encontrado el puesto
+                }
+            }
+        }
+    
+        // Si no se encuentra el puesto especificado (no debería ocurrir)
+        return "Puesto no encontrado.";
+    }
+
+    public String obtenerDueñoMediantePuesto(int fila_2, int columna_2) {
+        String vehiculoEncontrado = "";
+        int fila = fila_2 - 1;
+        int columna = columna_2 - 1;
+    
+        // Verificar si las coordenadas están dentro de los límites del array
+        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0 || columna >= puestos.getListPuestos()[fila].length) {
+            return "El puesto indicado está fuera de los límites.";
+        }
+    
+        for (int i = 0; i < puestos.getListPuestos().length; i++) {
+            for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
+                if (i == fila && j == columna) {
+                    if (puestos.getListPuestos()[i][j] != null && puestos.getListPuestos()[i][j] != null) {
+                        vehiculoEncontrado = "El Propietario del vehiuclo en el puesto " + (i + 1) + "," + (j + 1) + " es " + puestos.getListPuestos()[i][j].getPropietario().getNombre();
+                    } else {
+                        vehiculoEncontrado = "Este puesto está libre.";
+                    }
+                    return vehiculoEncontrado; // Salir del bucle una vez encontrado el puesto
+                }
+            }
+        }
+        return vehiculoEncontrado;
+    }
+    
 }

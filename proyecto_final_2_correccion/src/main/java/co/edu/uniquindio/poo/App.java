@@ -1,5 +1,7 @@
 package co.edu.uniquindio.poo;
 
+import java.time.LocalTime;
+
 /**
  * Hello world!
  *
@@ -15,13 +17,12 @@ public class App {
       Registro registro = new Registro(carro__1);
        parqueadero.agregarRegistro(registro);
 
-       parqueadero.agregarVehiculoPuesto("PTA-234");
+       parqueadero.agregarVehiculoPuesto("PTA-234",LocalTime.of(9,00));
 
        System.out.println(parqueadero.obtenerRegistro());
        System.out.println(parqueadero.obtenerRegistroVehiculos());
-       //parqueadero.obtenerVehiculoMediantePuesto(1,1);
-       //parqueadero.obtenerDueñoMediantePuesto(1,1);
-       //parqueadero.calculaTarifa("PTA-234");
+       System.out.println(parqueadero.obtenerVehiculoMediantePuesto(1,1));
+       System.out.println(parqueadero.obtenerDueñoMediantePuesto(1,1));
        //parqueadero.obtenerReporteDia();
        //parqueadero.obtenerReporteMes();
        //parqueadero.despacharVehiculo("PTA-234",13:00;
@@ -31,3 +32,4 @@ public class App {
       
     }
 }
+

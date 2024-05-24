@@ -54,7 +54,7 @@ public class Puesto {
                 }
                 if (!placaDuplicada) {
                     listaPuestos[filaAñadir][columnaAñadir] = vehiculo;
-                    System.out.println("Vehículo agregado: " + vehiculo.getModelo() + " en fila: " + filaAñadir + ", columna: " + columnaAñadir);
+                    System.out.println("Vehículo agregado: " + vehiculo.getModelo() + " en fila: " + (filaAñadir+1) + ", columna: " + (columnaAñadir+1));
                 } else {
                     System.out.println("El vehículo con placa " + vehiculo.getPlaca() + " ya está estacionado en otro puesto.");
                 }

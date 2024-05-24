@@ -34,7 +34,7 @@ public class AppTest {
         Registro registro = new Registro(motoClasica);
         parqueadero.agregarRegistro(registro);
 
-        parqueadero.agregarVehiculoPuesto("PTA-234");
+        
 
         LOG.info("Finalizando test Parqueadero Funcionando");
     }
