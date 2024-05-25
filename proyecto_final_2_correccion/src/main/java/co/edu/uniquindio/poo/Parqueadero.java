@@ -1,14 +1,17 @@
 package co.edu.uniquindio.poo;
 
+import java.sql.Struct;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-
-import javax.swing.JOptionPane;
+import java.util.Arrays;
 
 public class Parqueadero {
     private String nombre;
+    private double ganaciasCarros;
+    private double gananciasMotosHibridas;
+    private double gananciasotosClasicas;
+  
     private Registro[] registros;
     private Puesto puestos;
 
@@ -34,9 +37,31 @@ public class Parqueadero {
         this.puestos = puestos;
     }
 
-    @Override
-    public String toString() {
-        return "Parqueadero [nombre=" + nombre + ", registros=" + registros + ", puestos=" + puestos + "]";
+   
+    
+
+    public double getGanaciasCarros() {
+        return ganaciasCarros;
+    }
+
+    public void setGanaciasCarros(double tarifa) {
+        this.ganaciasCarros = tarifa;
+    }
+
+    public double getGananciasMotosHibridas() {
+        return gananciasMotosHibridas;
+    }
+
+    public void setGananciasMotosHibridas(double tarifa) {
+        this.gananciasMotosHibridas = tarifa;
+    }
+
+    public double getGananciasotosClasicas() {
+        return gananciasotosClasicas;
+    }
+
+    public void setGananciasotosClasicas(double tarifa) {
+        this.gananciasotosClasicas = tarifa;
     }
 
     public Registro[] getRegistros() {
@@ -45,6 +70,12 @@ public class Parqueadero {
 
     public void setRegistros(Registro[] registros) {
         this.registros = registros;
+    }
+
+    @Override
+    public String toString() {
+        return "Parqueadero [nombre=" + nombre + ", reporteDia="  + ", reporteMes=" 
+                + ", registros=" + Arrays.toString(registros) + ", puestos=" + puestos + "]";
     }
 
     // Metodo para agregar la matriz de puestos al parqueadero
@@ -72,7 +103,7 @@ public class Parqueadero {
     }
 
     // Metodo para agregar un vehiculo a un puesto del parqueadero
-    public void agregarVehiculoPuesto(String placa,LocalTime horaEntrada) {
+    public void agregarVehiculoPuesto(String placa, LocalTime horaEntrada) {
         for (Registro registro : registros) {
             if (registro != null && registro.getVehiculo().getPlaca().equals(placa)) {
                 Vehiculo vehiculo = registro.getVehiculo();
@@ -119,10 +150,12 @@ public class Parqueadero {
 
         for (int i = 0; i < puestos.getListPuestos().length; i++) {
             for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
-                if(puestos.getListPuestos()[i][j] != null){
-                    registroVehiculo = registroVehiculo + "El vehiculo "+puestos.getListPuestos()[i][j].getModelo()+" en el puesto "+(i+1)+","+(j+1)+ " es de "+puestos.getListPuestos()[i][j].getPropietario().getNombre()+"\n";
-                }else{
-                    registroVehiculo = registroVehiculo+"El puesto "+ (i+1)+","+(j+1)+" esta libre"+"\n";
+                if (puestos.getListPuestos()[i][j] != null) {
+                    registroVehiculo = registroVehiculo + "El vehiculo " + puestos.getListPuestos()[i][j].getModelo()
+                            + " en el puesto " + (i + 1) + "," + (j + 1) + " es de "
+                            + puestos.getListPuestos()[i][j].getPropietario().getNombre() + "\n";
+                } else {
+                    registroVehiculo = registroVehiculo + "El puesto " + (i + 1) + "," + (j + 1) + " esta libre" + "\n";
                 }
             }
         }
@@ -134,17 +167,19 @@ public class Parqueadero {
         String vehiculoEncontrado = "";
         int fila = fila_2 - 1;
         int columna = columna_2 - 1;
-    
+
         // Verificar si las coordenadas están dentro de los límites del array
-        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0 || columna >= puestos.getListPuestos()[fila].length) {
+        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0
+                || columna >= puestos.getListPuestos()[fila].length) {
             return "El puesto indicado está fuera de los límites.";
         }
-    
+
         for (int i = 0; i < puestos.getListPuestos().length; i++) {
             for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
                 if (i == fila && j == columna) {
-                    if (puestos.getListPuestos()[i][j] != null && puestos.getListPuestos()[i][j] != null) {
-                        vehiculoEncontrado = "El vehículo en el puesto " + (i + 1) + "," + (j + 1) + " es " + puestos.getListPuestos()[i][j].getModelo();
+                    if (puestos.getListPuestos()[i][j] != null) {
+                        vehiculoEncontrado = "El vehículo en el puesto " + (i + 1) + "," + (j + 1) + " es "
+                                + puestos.getListPuestos()[i][j].getModelo();
                     } else {
                         vehiculoEncontrado = "Este puesto está libre.";
                     }
@@ -152,26 +187,29 @@ public class Parqueadero {
                 }
             }
         }
-    
+
         // Si no se encuentra el puesto especificado (no debería ocurrir)
         return "Puesto no encontrado.";
     }
 
+    // Metodo para obtener el dueño de un vehiculo mediante el puesto ingresado
     public String obtenerDueñoMediantePuesto(int fila_2, int columna_2) {
         String vehiculoEncontrado = "";
         int fila = fila_2 - 1;
         int columna = columna_2 - 1;
-    
+
         // Verificar si las coordenadas están dentro de los límites del array
-        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0 || columna >= puestos.getListPuestos()[fila].length) {
+        if (fila < 0 || fila >= puestos.getListPuestos().length || columna < 0
+                || columna >= puestos.getListPuestos()[fila].length) {
             return "El puesto indicado está fuera de los límites.";
         }
-    
+
         for (int i = 0; i < puestos.getListPuestos().length; i++) {
             for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
                 if (i == fila && j == columna) {
-                    if (puestos.getListPuestos()[i][j] != null && puestos.getListPuestos()[i][j] != null) {
-                        vehiculoEncontrado = "El Propietario del vehiuclo en el puesto " + (i + 1) + "," + (j + 1) + " es " + puestos.getListPuestos()[i][j].getPropietario().getNombre();
+                    if (puestos.getListPuestos()[i][j] != null) {
+                        vehiculoEncontrado = "El Propietario del vehiuclo en el puesto " + (i + 1) + "," + (j + 1)
+                                + " es " + puestos.getListPuestos()[i][j].getPropietario().getNombre();
                     } else {
                         vehiculoEncontrado = "Este puesto está libre.";
                     }
@@ -181,5 +219,62 @@ public class Parqueadero {
         }
         return vehiculoEncontrado;
     }
-    
+
+    // metodo para darle salida a un vehiculo del parqueadero
+    public String despacharVehiculo(String placa, LocalTime horaSalida) {
+        for (Registro registro : registros) {
+            if (registro.getVehiculo() != null && registro.getVehiculo().getPlaca().equals(placa)) {
+                registro.setHoraSalida(horaSalida);
+
+                double tarifa = calcularTarifa(registro);
+                if(registro.getVehiculo() instanceof Carro){
+                    setGanaciasCarros(tarifa);
+                }else if (registro.getVehiculo() instanceof MotoClasica){
+                    setGananciasotosClasicas(tarifa);
+                }else{
+                    setGananciasMotosHibridas(tarifa);
+                }
+                String menasaje = "El total a pagar del vehículo " + registro.getVehiculo().getModelo() + " es "
+                        + tarifa
+                        + " pesos.";
+                retirarVehiculo(placa);
+                return menasaje;
+
+            }
+        }
+        return "El vehículo con la placa " + placa + " no existe.";
+    }
+
+    // Metodo para obtener el total a pargar de un vehiculo
+    private double calcularTarifa(Registro registro) {
+        long tiempoEstacionado = Duration.between(registro.getHoraEntrada(), registro.getHoraSalida()).toHours();
+        return tiempoEstacionado * registro.getVehiculo().getTarifa().getValor();
+    }
+
+    // Método para retirar un vehículo de la matriz
+    private void retirarVehiculo(String placa) {
+        for (int i = 0; i < puestos.getListPuestos().length; i++) {
+            for (int j = 0; j < puestos.getListPuestos()[i].length; j++) {
+                if (puestos.getListPuestos()[i][j] != null && puestos.getListPuestos()[i][j].getPlaca().equals(placa)) {
+                    System.out.println("Vehículo " + puestos.getListPuestos()[i][j].getModelo() + " retirado");
+                    puestos.getListPuestos()[i][j] = null;
+                    return; // Salir del método una vez encontrado y retirado el vehículo
+                }
+            }
+        }
+    }
+
+    public String obtenerReporteDia() {
+        String reporte;
+        reporte = "Ganancias de vehiculos: "+ganaciasCarros+"\n"+"Ganancias Motos Clasicas: "+gananciasotosClasicas+"\n"+"Ganancias Motos Hibridas: "+gananciasMotosHibridas;
+        return reporte;
+
+    }
+
+    public String obtenerReporteMes() {
+        String reporteMes;
+        reporteMes = "En el mes de "+LocalDate.now()+" fueron: \n"+"Ganancias de vehiculos: "+ganaciasCarros+"\n"+"Ganancias Motos Clasicas: "+gananciasotosClasicas+"\n"+"Ganancias Motos Hibridas: "+gananciasMotosHibridas;
+        return reporteMes;
+    }
+
 }
