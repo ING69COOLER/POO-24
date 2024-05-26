@@ -7,6 +7,8 @@ public class Puesto {
     private String listaReporte;
 
     public Puesto(int fila, int columna) {
+        assert fila > 0;
+        assert columna>0;
         this.fila = fila;
         this.columna = columna;
         this.listaPuestos = new Vehiculo[fila][columna];
