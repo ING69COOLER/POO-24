@@ -17,8 +17,8 @@
                   <Font name="Showcard Gothic" size="14.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtRegitroParqueadero" layoutX="-3.0" layoutY="34.0" prefHeight="185.0" prefWidth="586.0" />
-            <Button fx:id="btnAgregarVehiculo" layoutX="51.0" layoutY="317.0" mnemonicParsing="false" onAction="#ventanaAgregarVehiculo" text="Agregar Vehiculo">
+            <TextArea fx:id="txtRegitroParqueadero" layoutX="-3.0" layoutY="34.0" prefHeight="95.0" prefWidth="586.0" />
+            <Button fx:id="btnAgregarVehiculo" layoutX="51.0" layoutY="372.0" mnemonicParsing="false" onAction="#ventanaAgregarVehiculo" text="Ingresar Vehiculo">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
@@ -28,7 +28,7 @@
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnRegistroDia" layoutX="195.0" layoutY="406.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
+            <Button fx:id="btnRegistroDia" layoutX="355.0" layoutY="372.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
@@ -37,6 +37,17 @@
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font></Button>
+            <Button layoutX="48.0" layoutY="317.0" mnemonicParsing="false" onAction="#ventanaAgregarRegistro" text="Añadir al registro">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="196.0" layoutY="424.0" mnemonicParsing="false" text="obtener registro mensual">
+               <font>
+                  <Font name="Showcard Gothic" size="15.0" />
+               </font>
+            </Button>
+            <TextArea fx:id="txtRegistroVehiculos" layoutX="-3.0" layoutY="138.0" prefHeight="87.0" prefWidth="586.0" />
          </children>
       </Pane>
     </children>

@@ -20,20 +20,22 @@ public class ControlParqueaderoController {
     public ControlParqueaderoController() {
 
     }
-    //metodo singleton
+
+    // metodo singleton
     public static ControlParqueaderoController getcontrolParqueaderoController() {
         if (controlParqueaderoController == null) {
             controlParqueaderoController = new ControlParqueaderoController();
         }
         return controlParqueaderoController;
     }
-    //metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
+
+    // metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
     @SuppressWarnings("exports")
     public void recibirParqueadero(Parqueadero parqueaderoActualizado) {
         this.parqueadero = parqueaderoActualizado;
         if (parqueadero != null) {
             System.out.println("Recibido parqueadero en ControlParqueadero: " + parqueadero.getNombre());
-            
+
         } else {
             System.out.println("El objeto parqueadero es null al recibirlo");
         }
@@ -59,35 +61,44 @@ public class ControlParqueaderoController {
 
     @FXML
     private TextArea txtRegitroParqueadero;
-    //Meotdo para obtener el registro del parqueadero
+    @FXML
+    private TextArea txtRegistroVehiculos;
+
     @FXML
     void inicializarRegistro(ActionEvent event) {
+        txtRegitroParqueadero
+                .setText(ControlParqueaderoController.getcontrolParqueaderoController().parqueadero.obtenerRegistro());
+        txtRegistroVehiculos.setText(
+                ControlParqueaderoController.getcontrolParqueaderoController().parqueadero.obtenerRegistroVehiculos());
+
+    }
+
+    @FXML
+    void ventanaAgregarVehiculo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ventanaDespacho(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ventanaRegistroDia(ActionEvent event) throws IOException {
        
-
+        
     }
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("crearParqueadero");
-    }
-    //Boton para agregar vehiculo, el cual envia "parqueadero" a la clase "agregar vehiculo"
-    @FXML
-    void ventanaAgregarVehiculo() throws IOException {
-       
-    }
-
-    @FXML
-    void ventanaDespacho( ) throws IOException {
-       
-    }
-    
-
-    @FXML
-    void ventanaRegistroDia() throws IOException {
-        if(controlParqueaderoController !=null){
+    void ventanaAgregarRegistro (ActionEvent actionEvent)throws IOException{
+        System.out.println(controlParqueaderoController.parqueadero.getNombre());
+        if(controlParqueaderoController.parqueadero !=null){
+            System.out.println("Pasando parqueadero a AgregarVehiculoController: " + controlParqueaderoController.parqueadero.getNombre());
             parqueadero = controlParqueaderoController.parqueadero;
-            ObtenerRegistroDia.getObtenerRegistroDia().recibirParqueadero(parqueadero);
-            App.setRoot("obtenerRegistro");
+            AgregarRegistroController.getaAgregarRegistroController().recibirParqueadero(parqueadero);
+            App.setRoot("agregarRegistro");
+        }else{
+            System.out.println("El objeto parqueadero es null. No se puede abrir la ventana de agregar vehiculo");
         }
     }
 

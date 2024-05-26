@@ -131,7 +131,7 @@ public class Parqueadero {
 
     // Metodo para obtener el registro de los vehiculos inscritos en el parqueadero
     public String obtenerRegistro() {
-        String registroActualizado = "";
+        String registroActualizado = "Registro de clientes: \n";
         for (int i = 0; i < registros.length; i++) {
             if (registros[i] != null) {
                 registroActualizado = registroActualizado + "Propietario: "
@@ -139,6 +139,9 @@ public class Parqueadero {
                         + registros[i].getVehiculo().getPropietario().getCedula() + " Telefono: "
                         + registros[i].getVehiculo().getPropietario().getNumeroTelefonico() + " Vehiculo: "
                         + registros[i].getVehiculo().getModelo() + "\n";
+            }else{
+                registroActualizado = registroActualizado +"No hay clientes";
+                break;
             }
         }
         return registroActualizado;

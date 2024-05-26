@@ -2,9 +2,7 @@ package co.edu.uniquindio.poo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 
 import co.edu.uniquindio.poo.clases.Parqueadero;
 import javafx.event.ActionEvent;
@@ -14,39 +12,33 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 
-public class AgregarVehiculoController {
-    private static AgregarVehiculoController agregarVehiculoController;
+public class AgregarRegistroController {
+    private static AgregarRegistroController agregarRegistroController;
     private Parqueadero parqueadero;
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-    public AgregarVehiculoController() {
-       
+    public AgregarRegistroController() {
+
     }
 
-    public static AgregarVehiculoController getaAgregarVehiculoController() {
-        if (agregarVehiculoController == null) {
-            agregarVehiculoController = new AgregarVehiculoController();
+    public static AgregarRegistroController getaAgregarRegistroController() {
+        if (agregarRegistroController == null) {
+            agregarRegistroController = new AgregarRegistroController();
         }
-        return agregarVehiculoController;
+        return agregarRegistroController;
     }
-    //Metdoodo que recibe "parqueadero" de la clase ""ControlParqeuadero"
+
+    // Metdoodo que recibe "parqueadero" de la clase ""ControlParqeuadero"
     @SuppressWarnings("exports")
     public void recibirParqueadero(Parqueadero parqueadero) {
         if (parqueadero != null) {
             System.out.println("Parqueadero recibido en AgregarVehiculoController: " + parqueadero.getNombre());
-            this.parqueadero=parqueadero;
+            this.parqueadero = parqueadero;
             System.out.println(parqueadero.obtenerRegistro());
         } else {
             System.out.println("El objeto parqueadero es null en AgregarVehiculoController");
         }
     }
-    @FXML
-    void handleTipoVehiculo(ActionEvent event) {
-        MenuItem menuItem = (MenuItem) event.getSource();
-        String tipoVehiculo = menuItem.getText();
-        spltTipoVehiculo.setText(tipoVehiculo); // Actualiza el texto del SplitMenuButton con la selección
-        System.out.println("Tipo de Vehículo seleccionado: " + tipoVehiculo);
-    }
+
     @FXML
     private ResourceBundle resources;
 
@@ -61,28 +53,18 @@ public class AgregarVehiculoController {
 
     @FXML
     private SplitMenuButton spltTipoVehiculo;
-    
-    @FXML
-    private MenuItem txtObtenerCarro;
-    
-    @FXML
-    private MenuItem txtObtenerMotoClasica;
-    
-    @FXML
-    private MenuItem txtObtenerMotoHibrida;
-    
-
-
- 
-
-    @FXML
-    private TextField txtHoraEntrada;
 
     @FXML
     private TextField txtModelo;
 
+    @FXML
+    private MenuItem txtObtenerCarro;
 
-   
+    @FXML
+    private MenuItem txtObtenerMotoClasica;
+
+    @FXML
+    private MenuItem txtObtenerMotoHibrida;
 
     @FXML
     private TextField txtPlaca;
@@ -91,26 +73,27 @@ public class AgregarVehiculoController {
     private TextField txtPropietario;
 
     @FXML
-    private TextField txtTarifa;
-
-    @FXML
     private TextField txtVelocidad;
 
     @FXML
     void agregarVehiculo(ActionEvent event) {
-       
+
     }
 
     @FXML
-    void obtenerTIpo(ActionEvent event) {
-        // Implementar lógica para obtener tipo de vehículo
+    void handleTipoVehiculo(ActionEvent event) {
+        MenuItem menuItem = (MenuItem) event.getSource();
+        String tipoVehiculo = menuItem.getText();
+        spltTipoVehiculo.setText(tipoVehiculo); // Actualiza el texto del SplitMenuButton con la selección
+        System.out.println("Tipo de Vehículo seleccionado: " + tipoVehiculo);
     }
 
     @FXML
     void regresar() throws IOException {
-        parqueadero=agregarVehiculoController.parqueadero;
+        parqueadero = agregarRegistroController.parqueadero;
         ControlParqueaderoController.getcontrolParqueaderoController().recibirParqueadero(parqueadero);
         System.out.println("Parqueadero enviado a ControlParqueadero");
         App.setRoot("menuParqueadero");
     }
+
 }
