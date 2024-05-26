@@ -28,7 +28,7 @@
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnRegistroDia" layoutX="355.0" layoutY="372.0" mnemonicParsing="false" onAction="#ventanaRegistroDia" text="Obtener Registro Dia">
+            <Button fx:id="btnRegistroDia" layoutX="355.0" layoutY="372.0" mnemonicParsing="false" onAction="#obtenerReporteDia" text="Obtener Registro Dia">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
@@ -42,7 +42,7 @@
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="196.0" layoutY="424.0" mnemonicParsing="false" text="obtener registro mensual">
+            <Button fx:id="btnRepoteMensual" layoutX="196.0" layoutY="424.0" mnemonicParsing="false" onAction="#obtenerReporteMensual" text="obtener registro mensual">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />
                </font>

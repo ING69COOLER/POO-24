@@ -4,9 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.poo.clases.Carro;
 import co.edu.uniquindio.poo.clases.Parqueadero;
+import co.edu.uniquindio.poo.clases.Propietario;
+import co.edu.uniquindio.poo.clases.Registro;
+import co.edu.uniquindio.poo.clases.Tarifa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
@@ -56,6 +62,10 @@ public class AgregarRegistroController {
 
     @FXML
     private TextField txtModelo;
+    @FXML
+    private TextField txtCedula;
+    @FXML
+    private TextField txtTelefono;
 
     @FXML
     private MenuItem txtObtenerCarro;
@@ -77,7 +87,41 @@ public class AgregarRegistroController {
 
     @FXML
     void agregarVehiculo(ActionEvent event) {
-
+        parqueadero = agregarRegistroController.parqueadero;
+        String tipo = spltTipoVehiculo.getText();
+        String nombrePropietario = txtPropietario.getText();
+        String cedulaPropietario = txtCedula.getText();
+        String telefonoPropietario = txtTelefono.getText();
+        String placa = txtPlaca.getText();
+        String modelo = txtModelo.getText();
+        if (!tipo.isBlank() && !nombrePropietario.isBlank() && !cedulaPropietario.isBlank()
+                && !telefonoPropietario.isBlank() && !placa.isBlank() && !modelo.isBlank()) {
+            if (tipo.equals("carro")) {
+                Propietario propietario = new Propietario(nombrePropietario, cedulaPropietario, telefonoPropietario);
+                Carro carro = new Carro(placa, modelo, propietario, Tarifa.CARRO);
+                Registro registro = new Registro(carro);
+                parqueadero.agregarRegistro(registro);
+                mostrarAlerta("Éxito", "Registro agregado exitosamente", AlertType.INFORMATION);
+            } else if (tipo.equals("moto clásica")) {
+                Propietario propietario = new Propietario(nombrePropietario, cedulaPropietario, telefonoPropietario);
+                Carro carro = new Carro(placa, modelo, propietario, Tarifa.MOTO_CLASICA);
+                Registro registro = new Registro(carro);
+                parqueadero.agregarRegistro(registro);
+                mostrarAlerta("Éxito", "Registro agregado exitosamente", AlertType.INFORMATION);
+            } else if (tipo.equals("moto híbrida")) {
+                Propietario propietario = new Propietario(nombrePropietario, cedulaPropietario, telefonoPropietario);
+                Carro carro = new Carro(placa, modelo, propietario, Tarifa.MOTO_HIBRIDA);
+                Registro registro = new Registro(carro);
+                parqueadero.agregarRegistro(registro);
+                mostrarAlerta("Éxito", "Registro agregado exitosamente", AlertType.INFORMATION);
+            }
+        }
+        spltTipoVehiculo.setText("");
+        txtPlaca.setText("");
+        txtPropietario.setText("");
+        txtCedula.setText("");
+        txtTelefono.setText("");
+        txtModelo.setText("");
     }
 
     @FXML
@@ -94,6 +138,14 @@ public class AgregarRegistroController {
         ControlParqueaderoController.getcontrolParqueaderoController().recibirParqueadero(parqueadero);
         System.out.println("Parqueadero enviado a ControlParqueadero");
         App.setRoot("menuParqueadero");
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
 }

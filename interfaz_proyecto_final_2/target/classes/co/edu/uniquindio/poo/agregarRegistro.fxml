@@ -48,7 +48,7 @@
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Button>
-            <SplitMenuButton fx:id="spltTipoVehiculo" accessibleRole="COMBO_BOX" contentDisplay="BOTTOM" layoutX="219.0" layoutY="200.0" mnemonicParsing="false" onAction="#obtenerTIpo" text="Tipo Vehiculo">
+            <SplitMenuButton fx:id="spltTipoVehiculo" accessibleRole="COMBO_BOX" contentDisplay="BOTTOM" layoutX="219.0" layoutY="200.0" mnemonicParsing="false" text="Tipo Vehiculo">
                <items>
                   <MenuItem fx:id="txtObtenerCarro" onAction="#handleTipoVehiculo" text="carro" />
                   <MenuItem fx:id="txtObtenerMotoClasica" onAction="#handleTipoVehiculo" text="moto clásica" />
@@ -68,8 +68,8 @@
                   <Font name="Showcard Gothic" size="15.0" />
                </font>
             </Label>
-            <TextField layoutX="381.0" layoutY="64.0" />
-            <TextField layoutX="112.0" layoutY="108.0" />
+            <TextField fx:id="txtCedula" layoutX="381.0" layoutY="64.0" />
+            <TextField fx:id="txtTelefono" layoutX="112.0" layoutY="108.0" />
             <Label layoutX="21.0" layoutY="112.0" text="telefono">
                <font>
                   <Font name="Showcard Gothic" size="15.0" />

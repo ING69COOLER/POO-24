@@ -9,6 +9,8 @@ import co.edu.uniquindio.poo.clases.Parqueadero;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
@@ -43,7 +45,8 @@ public class ControlParqueaderoController {
 
     @FXML
     private ResourceBundle resources;
-
+    @FXML
+    private Button btnRepoteMensual;
     @FXML
     private URL location;
 
@@ -73,33 +76,64 @@ public class ControlParqueaderoController {
 
     }
 
+    // Boton para agregar vehiculo, el cual envia "parqueadero" a la clase "agregar
+    // vehiculo"
     @FXML
-    void ventanaAgregarVehiculo(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ventanaDespacho(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ventanaRegistroDia(ActionEvent event) throws IOException {
-       
-        
-    }
-
-    @FXML
-    void ventanaAgregarRegistro (ActionEvent actionEvent)throws IOException{
+    void ventanaAgregarVehiculo() throws IOException {
         System.out.println(controlParqueaderoController.parqueadero.getNombre());
-        if(controlParqueaderoController.parqueadero !=null){
-            System.out.println("Pasando parqueadero a AgregarVehiculoController: " + controlParqueaderoController.parqueadero.getNombre());
+        if (controlParqueaderoController.parqueadero != null) {
+            System.out.println("Pasando parqueadero a AgregarVehiculoController: "
+                    + controlParqueaderoController.parqueadero.getNombre());
+            parqueadero = controlParqueaderoController.parqueadero;
+            AgregarVehiculoController.getaAgregarVehiculoController().recibirParqueadero(parqueadero);
+            App.setRoot("agregarVehiculo");
+
+        } else {
+            System.out.println("El objeto parqueadero es null. No se puede abrir la ventana de agregar vehículo.");
+        }
+    }
+
+    @FXML
+    void ventanaDespacho() throws IOException {
+        if (controlParqueaderoController.parqueadero != null) {
+            parqueadero = controlParqueaderoController.parqueadero;
+            DespacharVehiculoController.getDespacharVehiculoController().recibirParqueadero(parqueadero);
+            App.setRoot("despachar");
+        } else {
+            System.out.println("El objeto es null. No se puede abrir la ventana deschar");
+        }
+    }
+
+    @FXML
+    void obtenerReporteDia() throws IOException {
+        mostrarAlerta("Reporte Dia", controlParqueaderoController.parqueadero.obtenerReporteDia(), AlertType.INFORMATION);
+    }
+
+    @FXML
+    void ventanaAgregarRegistro(ActionEvent actionEvent) throws IOException {
+        System.out.println(controlParqueaderoController.parqueadero.getNombre());
+        if (controlParqueaderoController.parqueadero != null) {
+            System.out.println("Pasando parqueadero a AgregarVehiculoController: "
+                    + controlParqueaderoController.parqueadero.getNombre());
             parqueadero = controlParqueaderoController.parqueadero;
             AgregarRegistroController.getaAgregarRegistroController().recibirParqueadero(parqueadero);
             App.setRoot("agregarRegistro");
-        }else{
+        } else {
             System.out.println("El objeto parqueadero es null. No se puede abrir la ventana de agregar vehiculo");
         }
     }
 
+    @FXML
+    void obtenerReporteMensual(ActionEvent event) {
+        mostrarAlerta("Reporte Mensual", controlParqueaderoController.parqueadero.obtenerReporteMes(), AlertType.INFORMATION);
+    }
+
+
+    private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 }

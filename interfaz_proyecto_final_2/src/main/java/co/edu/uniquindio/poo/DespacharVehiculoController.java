@@ -1,12 +1,16 @@
 package co.edu.uniquindio.poo;
+
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.clases.Parqueadero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,24 +20,25 @@ public class DespacharVehiculoController {
     private Parqueadero parqueadero;
     DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
-
-    public DespacharVehiculoController(){
+    public DespacharVehiculoController() {
 
     }
-    //metodo singleton
+
+    // metodo singleton
     public static DespacharVehiculoController getDespacharVehiculoController() {
         if (despacharVehiculoController == null) {
             despacharVehiculoController = new DespacharVehiculoController();
         }
         return despacharVehiculoController;
     }
-        //metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
+
+    // metodo para recibir la clase parqueadero de la calse""CrearParqueadero"
     @SuppressWarnings("exports")
     public void recibirParqueadero(Parqueadero parqueaderoActualizado) {
         this.parqueadero = parqueaderoActualizado;
         if (parqueadero != null) {
             System.out.println("Recibido parqueadero en ControlParqueadero: " + parqueadero.getNombre());
-            
+
         } else {
             System.out.println("El objeto parqueadero es null al recibirlo");
         }
@@ -68,19 +73,47 @@ public class DespacharVehiculoController {
 
     @FXML
     void calcularTarifa(ActionEvent event) {
-       
+        parqueadero = despacharVehiculoController.parqueadero;
+        String placa = txtPlaca.getText();
+        String horaSalidaStr = txtHorasalida.getText();
+        LocalTime horaSalida = LocalTime.parse(horaSalidaStr, timeFormatter);
+        for (int i = 0; i < parqueadero.getRegistros().length; i++) {
+            if (parqueadero.getRegistros()[i] != null
+                    && parqueadero.getRegistros()[i].getVehiculo().getPlaca().equals(placa)) {
+                    txtPago.setText(parqueadero.despacharVehiculo(placa, horaSalida));
+                    mostrarAlerta("Éxito", "Vehiculo despachado exitosamente", AlertType.INFORMATION);
+                    break;
+            } else {
+                mostrarAlerta("Error", "El vehiculo ingresado no existe", AlertType.INFORMATION);
+                break;
+            }
+
+        }
+
     }
 
     @FXML
     void registro(ActionEvent event) {
-      
+        parqueadero = despacharVehiculoController.parqueadero;
+        txtRegistro.setText(parqueadero.obtenerRegistroVehiculos());
     }
 
     @FXML
     void regresar() throws IOException {
-  
+        parqueadero = despacharVehiculoController.parqueadero;
+        ControlParqueaderoController.getcontrolParqueaderoController().recibirParqueadero(parqueadero);
+        System.out.println("Parqueadero enviado a ControlParqueadero");
+        App.setRoot("menuParqueadero");
     }
 
- }
+    private void mostrarAlerta(String titulo, String mensaje, AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
 
+    
 
+}
